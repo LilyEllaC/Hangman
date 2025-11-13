@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -16,14 +17,14 @@ void instructions(){
 //main function
 int main(){
     //variables
-    string answer, shownAnswer, wantRules, playAgain, letterGuessed;
-    char guess;
-    int guessNum, wrongMax, letterPlace;
+    string answer, shownAnswer, wantRules, playAgain, letter, lowerLetter;
+    char guess, letterGuessed;
+    int guessNum, wrongMax, letterPlace, counter=0;
     vector <string> rights, wrongs;
 
     //intro
     cout<<"Hello and welcome to this two person game of hangman!";
-    cout<<"\nIf you need instructions on how to play please enter 'y' otherwise enter 'n'";
+    cout<<"\nIf you need instructions on how to play please enter 'y' otherwise enter 'n': ";
     cin>>wantRules;
     //going to instruction
     if (wantRules.find("y")<6){
@@ -31,7 +32,7 @@ int main(){
     }
 
     //getting answer
-    cout<<"\nPlease have the guesser look away, and enter the phrase you want them to guess.";
+    cout<<"\nPlease have the guesser look away, and enter the phrase you want them to guess.\n";
     cin>>ws;
     getline(cin, answer);
 
@@ -45,6 +46,7 @@ int main(){
             letterPlace=shownAnswer.find(i);
             if (letterPlace!=-1){
                 shownAnswer.replace(letterPlace, 1, "-");
+                counter++;
             }
         } while (letterPlace!=-1);
     }
@@ -52,19 +54,22 @@ int main(){
 
     //game loop
     while (answer!=shownAnswer){
-        cout<<"Please guess a letter: ";
+        cout<<"\nPlease guess a letter: ";
         cin>>letterGuessed;
-        cout<<answer.find(letterGuessed);
-        if (answer.find(letterGuessed)<answer.length()){
-            for (int i='A'; i<='Z'; i++){
-                do {
-                    letterPlace=answer.find('A');
-                    shownAnswer[letterPlace]=i;
-                } while (letterPlace!=-1);
-            }
-            rights.push_back(letterGuessed);
+        letter=toupper(letterGuessed);
+        lowerLetter=tolower(letterGuessed);
+        if (answer.find(letter)<answer.length()){
+            do {
+                letterPlace=answer.find(letter);
+                if (letterPlace!=-1){
+                    answer.replace(letterPlace, 1, lowerLetter);
+                    shownAnswer[letterPlace]=toupper(letterGuessed);
+                }
+            } while (letterPlace!=-1);
+            
+            rights.push_back(letter);
         } else {
-            wrongs.push_back(letterGuessed);
+            wrongs.push_back(letter);
             cout<<"Sorry, that letter isn't in the word.";
         }
         cout<<shownAnswer;
