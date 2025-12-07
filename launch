@@ -1,0 +1,2 @@
+/usr/bin/g++ -fdiagnostics-color=always -g 'hangman.cpp' -o 'hangman'
+./hangman

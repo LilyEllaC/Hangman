@@ -48,7 +48,7 @@ string randomWord(set <string> wordleAnswers){
 
 //gives instructions 
 void instructions(){
-    cout<<"\nThis is a one or two player game of hangman. In the two player game one person enters the sentence or word for the other. \nFor the one player game the answer will be a randomly generated weird English word. Becareful, you might never have even heard it before! \nIn both games the guesser then guesses letters to figure out the word. \nWhen a letter is wrong the hangman will get another body part. \nYou can only make 10 incorrect guesses so I'd be careful. \nGood luck!";
+    cout<<"\nThis is a one or two player game of hangman. In the two player game one person enters the sentence or word for the other. \nFor the one player game the answer will be a randomly generated weird English word. Be careful, you might never have even heard it before! \nIn both games the guesser then guesses letters to figure out the word. \nWhen a letter is wrong the hangman will get another body part. \nIf they are right, all of that letter appear in the word. \nYou can only make 10 incorrect guesses so I'd be careful. \nGood luck!\n\n";
 }
 
 //having the hangman in a function to look better
@@ -178,11 +178,10 @@ int main(){
             cout<<"\nPlease have the guesser look away, and enter the phrase you want them to guess.\n";
             cin>>ws;
             getline(cin, answer);
+        } else {
+            //getting word for 1 player
+            answer=randomWord(onePlayerWords);
         }
-
-        //getting word for 1 player
-        answer=randomWord(onePlayerWords);
-        //answer="Appleloosa";
 
         system("clear");
 

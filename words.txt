@@ -17,7 +17,7 @@ accubation
 lollygag
 abecedarian
 bamboozled
-cutesy-poo
+cutesy_poo
 flabbergast
 foppish
 cattywampus
